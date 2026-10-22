@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Fit House: каталог и заказ</title>
+<meta name="description" content="Спортивное питание Fit House, Грозный. Соберите корзину и отправьте заказ менеджеру в WhatsApp.">
+<meta name="theme-color" content="#111111">
+<meta property="og:title" content="Fit House: каталог и заказ">
+<meta property="og:description" content="Соберите корзину, цены видны сразу. Заказ уйдёт менеджеру в WhatsApp.">
+<meta property="og:image" content="img/icon.png">
+<link rel="icon" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="demo" id="demo" hidden></div>
+
+<header class="top">
+  <div class="top-in">
+    <a class="mark" href="./" aria-label="Fit House: в начало"><span class="fit">FIT</span><span class="house">HOUSE</span></a>
+    <button class="top-cart" id="topCart" type="button" aria-label="Открыть корзину">
+      <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" d="M5 8h14l-1.2 12H6.2L5 8Zm4 0V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="top-count" id="topCount" hidden>0</span>
+    </button>
+  </div>
+  <nav class="cats" id="cats" aria-label="Разделы каталога"></nav>
+</header>
+
+<section class="hero">
+  <img class="logo" src="img/logo.webp" alt="Логотип Fit House Nutrition" width="520" height="482">
+  <div class="hero-text">
+    <h1>Спортивное питание</h1>
+    <p>Выберите товары, корзина сама посчитает сумму. Заказ уйдёт менеджеру в WhatsApp.</p>
+    <div class="chips"><span class="chip" id="city"></span><span class="chip" id="count"></span></div>
+  </div>
+</section>
+
+<div class="search">
+  <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  <input id="q" type="search" placeholder="Поиск: бренд, товар или вкус" autocomplete="off" aria-label="Поиск по каталогу">
+</div>
+
+<main id="list"></main>
+
+<section class="block">
+  <h2>Как заказать</h2>
+  <ol class="steps">
+    <li><b>Выберите товары.</b> У товара с разными вкусами нажмите «Выбрать вкус».</li>
+    <li><b>Проверьте корзину.</b> Сумма считается сама. Укажите самовывоз или доставку.</li>
+    <li><b>Отправьте заказ.</b> Он придёт менеджеру в WhatsApp готовым сообщением.</li>
+  </ol>
+</section>
+
+<footer class="foot">
+  <img src="img/logo.webp" alt="" width="140" height="130" loading="lazy">
+  <p id="place"></p>
+  <p><a id="tel" href="#"></a></p>
+  <p><a id="insta" href="#" target="_blank" rel="noopener"></a></p>
+  <p class="small" id="priceDate"></p>
+</footer>
+
+<div class="bar" id="bar">
+  <button class="bar-btn" id="openCart" type="button">
+    <span class="bar-count" id="barCount">0</span>
+    <span>Корзина</span>
+    <span class="bar-sum" id="barSum">0 ₽</span>
+  </button>
+</div>
+
+<!-- Товар: вкусы и количество -->
+<div class="sheet" id="details" aria-hidden="true">
+  <div class="panel" role="dialog" aria-modal="true" aria-labelledby="dName">
+    <button class="x" data-close type="button" aria-label="Закрыть">✕</button>
+    <div class="d-pic"><img id="dImg" alt="" width="600" height="600"></div>
+    <div class="d-body">
+      <p class="brand" id="dBrand"></p>
+      <h3 id="dName"></h3>
+      <div id="dRows"></div>
+      <button class="ghost" id="dShare" type="button">Поделиться товаром</button>
+    </div>
+  </div>
+</div>
+
+<!-- Корзина -->
+<div class="sheet" id="cart" aria-hidden="true">
+  <div class="panel pad" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+    <div class="ph"><h3 id="cartTitle">Ваш заказ</h3><button class="x" data-close type="button" aria-label="Закрыть">✕</button></div>
+    <div id="lines"></div>
+    <div class="cart-tools">
+      <button class="link" id="clear" type="button">Очистить</button>
+      <button class="link" id="shareCart" type="button">Ссылка на эту корзину</button>
+    </div>
+    <div class="tot"><span>Итого</span><span id="total">0 ₽</span></div>
+    <div class="seg" id="way">
+      <button class="on" data-v="Самовывоз" type="button">Самовывоз</button>
+      <button data-v="Доставка" type="button">Доставка</button>
+    </div>
+    <div id="addrBox" hidden><label for="addr">Адрес доставки</label><input id="addr" autocomplete="street-address" placeholder="Улица, дом, квартира"></div>
+    <label for="name">Ваше имя</label><input id="name" autocomplete="given-name" placeholder="Как к вам обращаться">
+    <label for="comment">Комментарий</label><textarea id="comment" rows="2" placeholder="Например: позвоните перед доставкой"></textarea>
+    <button class="send" id="sendWa" type="button">Отправить заказ в WhatsApp</button>
+    <p class="note">Менеджер ответит в WhatsApp и подтвердит заказ.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="data/catalog.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

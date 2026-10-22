@@ -119,7 +119,7 @@ function refresh(productId) {
   if (openProduct) renderRows();
   const n = cartCount();
   $("bar").classList.toggle("show", n > 0);
-  $("barCount").textContent = n;
+  $("barCount").textContent = `В корзине ${n} шт`;
   $("barSum").textContent = rub(cartTotal());
   $("topCount").hidden = !n; $("topCount").textContent = n;
   if (productId) { const b = $("bar").firstElementChild; b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); }
